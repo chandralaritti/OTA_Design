@@ -1,6 +1,7 @@
+;Does not the specific PDK. 
 pcDefinePCell(
 
-list(ddGetObj("test_Pcells") "OTAN" "layout")
+list(ddGetObj("test_Pcells") "OTA" "layout")
 
 (
 ;Transitor info
@@ -30,6 +31,7 @@ list(ddGetObj("test_Pcells") "OTAN" "layout")
 	(metalWidth1 1)
 	(metalWidth2 1.0)
 	(metalWidth3 1.0)
+	(metalWidth4 1.0)
 	(numberOfInputs 6)
 	(nwell_enclosure 1)
 )
@@ -950,8 +952,8 @@ rodAlign(
 ;NMOS -Diff pair
 nC12DrainConn=rodCreatePath(
 		?name "nC12DrainConn"
-		?layer list("metal3" "drawing")
-		?width metalWidth3
+		?layer list("metal4" "drawing")
+		?width metalWidth4
 		?pts
 		list(
 		nC1DrainObj~>upperLeft nC2DrainObj~>upperRight)
@@ -965,8 +967,8 @@ rodAlign(
 )
 nD12DrainConn=rodCreatePath(
 		?name "nD12DrainConn"
-		?layer list("metal3" "drawing")
-		?width metalWidth3
+		?layer list("metal4" "drawing")
+		?width metalWidth4
 		?pts
 		list(
 		nC1DrainObj~>upperLeft nC2DrainObj~>upperRight)
@@ -980,8 +982,8 @@ rodAlign(
 )
 nD34DrainConn=rodCreatePath(
 		?name "nD34DrainConn"
-		?layer list("metal3" "drawing")
-		?width metalWidth3
+		?layer list("metal4" "drawing")
+		?width metalWidth4
 		?pts
 		list(
 		nD3DrainObj~>lowerLeft nD4DrainObj~>lowerRight)
@@ -995,8 +997,8 @@ rodAlign(
 )
 nC34DrainConn=rodCreatePath(
 		?name "nC34DrainConn"
-		?layer list("metal3" "drawing")
-		?width metalWidth3
+		?layer list("metal4" "drawing")
+		?width metalWidth4
 		?pts
 		list(
 		nD3DrainObj~>lowerLeft nD4DrainObj~>lowerRight)
@@ -1009,8 +1011,8 @@ rodAlign(
 	?ySep -metalMetalSep
 )
 ;NC1Drain
-nC1DrainM2=rodCreatePath(
-	?layer list("metal2" "drawing")
+nC1DrainM3=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nC1DrainObj~>width
 	?pts
 	list(
@@ -1018,9 +1020,16 @@ nC1DrainM2=rodCreatePath(
 	rodAddToY(nC1DrainObj~>upperCenter (metalMetalSep+metalWidth3))
 	)
 )
-;NC2Drain
-nC2DrainM2=rodCreatePath(
+nC1DrainAddM2=rodCreatePath(
 	?layer list("metal2" "drawing")
+	?width nC1DrainObj~>width
+	?pts
+	list(
+	nC1DrainObj~>lowerCenter nC1DrainObj~>upperCenter)
+)
+;NC2Drain
+nC2DrainM3=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nC2DrainObj~>width
 	?pts
 	list(
@@ -1028,9 +1037,16 @@ nC2DrainM2=rodCreatePath(
 	rodAddToY(nC2DrainObj~>upperCenter (metalMetalSep+metalWidth3))
 	)
 )
-;NC3Drain
-nC3DrainM2=rodCreatePath(
+nC2DrainAddM2=rodCreatePath(
 	?layer list("metal2" "drawing")
+	?width nC2DrainObj~>width
+	?pts
+	list(
+	nC2DrainObj~>lowerCenter nC2DrainObj~>upperCenter)
+)
+;NC3Drain
+nC3DrainM3=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nC3DrainObj~>width
 	?pts
 	list(
@@ -1038,9 +1054,16 @@ nC3DrainM2=rodCreatePath(
 	rodAddToY(nC3DrainObj~>lowerCenter -2.0*(metalMetalSep+metalWidth3))
 	)
 )
-;ND1Drain
-nD1DrainM2=rodCreatePath(
+nC3DrainAddM2=rodCreatePath(
 	?layer list("metal2" "drawing")
+	?width nC3DrainObj~>width
+	?pts
+	list(
+	nC3DrainObj~>lowerCenter nC3DrainObj~>upperCenter)
+)
+;ND1Drain
+nD1DrainM3=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nD1DrainObj~>width
 	?pts
 	list(
@@ -1048,9 +1071,16 @@ nD1DrainM2=rodCreatePath(
 	rodAddToY(nD1DrainObj~>upperCenter 2.0*(metalMetalSep+metalWidth3))
 	)
 )
-;ND3Drain
-nD3DrainM2=rodCreatePath(
+nD1DrainAddM2=rodCreatePath(
 	?layer list("metal2" "drawing")
+	?width nD1DrainObj~>width
+	?pts
+	list(
+	nD1DrainObj~>lowerCenter nD1DrainObj~>upperCenter)
+)
+;ND3Drain
+nD3DrainM3=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nD3DrainObj~>width
 	?pts
 	list(
@@ -1058,9 +1088,16 @@ nD3DrainM2=rodCreatePath(
 	rodAddToY(nD3DrainObj~>lowerCenter -(metalMetalSep+metalWidth3))
 	)
 )
-;ND4Drain
-nD4DrainM2=rodCreatePath(
+nD3DrainAddM2=rodCreatePath(
 	?layer list("metal2" "drawing")
+	?width nD3DrainObj~>width
+	?pts
+	list(
+	nD3DrainObj~>lowerCenter nD3DrainObj~>upperCenter)
+)
+;ND4Drain
+nD4DrainM3=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nD4DrainObj~>width
 	?pts
 	list(
@@ -1068,9 +1105,16 @@ nD4DrainM2=rodCreatePath(
 	rodAddToY(nD4DrainObj~>lowerCenter -(metalMetalSep+metalWidth3))
 	)
 )
+nD4DrainAddM2=rodCreatePath(
+	?layer list("metal2" "drawing")
+	?width nD4DrainObj~>width
+	?pts
+	list(
+	nD4DrainObj~>lowerCenter nD4DrainObj~>upperCenter)
+)
 ;NC12 Conn
 nC12DrainConnX=rodCreatePath(
-	?layer list("metal3" "drawing")
+	?layer list("metal4" "drawing")
 	?width nC1DrainObj~>width
 	?pts
 	list(
@@ -1080,7 +1124,7 @@ nC12DrainConnX=rodCreatePath(
 )
 ;NC34 Conn
 nC34DrainConnX=rodCreatePath(
-	?layer list("metal3" "drawing")
+	?layer list("metal4" "drawing")
 	?width nC1DrainObj~>width
 	?pts
 	list(
@@ -1096,9 +1140,10 @@ nCDrainConn=rodCreatePath(
 	list(
 	nC34DrainConnX~>lowerLeft nC12DrainConnX~>upperLeft)
 )
+
 ;ND12 Conn
 nD12DrainConnX=rodCreatePath(
-	?layer list("metal3" "drawing")
+	?layer list("metal4" "drawing")
 	?width nD1DrainObj~>width
 	?pts
 	list(
@@ -1108,7 +1153,7 @@ nD12DrainConnX=rodCreatePath(
 )
 ;ND34 Conn
 nD34DrainConnX=rodCreatePath(
-	?layer list("metal3" "drawing")
+	?layer list("metal4" "drawing")
 	?width nD1DrainObj~>width
 	?pts
 	list(
@@ -1126,18 +1171,46 @@ nDDrainConn=rodCreatePath(
 )
 ;NMOS CD Source Connection
 nSourceConn1=rodCreatePath(
-	?layer list("metal2" "drawing")
+	?layer list("metal3" "drawing")
 	?width nC1SourceObj~>width
 	?pts
 	list(
 	nC1SourceObj~>upperCenter nC3SourceObj~>lowerCenter)
 )
-nSourceConn2=rodCreatePath(
+nSourceConnC1M2=rodCreatePath(
 	?layer list("metal2" "drawing")
+	?width nC1SourceObj~>width
+	?pts
+	list(
+	nC1SourceObj~>lowerCenter nC1SourceObj~>upperCenter)
+)
+nSourceConnC3M2=rodCreatePath(
+	?layer list("metal2" "drawing")
+	?width nC3SourceObj~>width
+	?pts
+	list(
+	nC3SourceObj~>lowerCenter nC3SourceObj~>upperCenter)
+)
+nSourceConn2=rodCreatePath(
+	?layer list("metal3" "drawing")
 	?width nD2SourceObj~>width
 	?pts
 	list(
 	nD2SourceObj~>upperCenter nD4SourceObj~>lowerCenter)
+)
+nSourceConnD2M2=rodCreatePath(
+	?layer list("metal2" "drawing")
+	?width nD2SourceObj~>width
+	?pts
+	list(
+	nD2SourceObj~>lowerCenter nD2SourceObj~>upperCenter)
+)
+nSourceConnD4M2=rodCreatePath(
+	?layer list("metal2" "drawing")
+	?width nD4SourceObj~>width
+	?pts
+	list(
+	nD4SourceObj~>lowerCenter nD4SourceObj~>upperCenter)
 )
 ;NMOS EF Source Conn
 nE1F1SourceConn=rodCreatePath(
@@ -1240,8 +1313,8 @@ pA1DrainConnX=rodCreatePath(
 		)
 )
 pnV1Conn=rodCreatePath(
-		?layer list("metal2" "drawing")
-		?width metalWidth2
+		?layer list("metal3" "drawing")
+		?width metalWidth3
 		?pts
 		list(
 		pAV1ConnX~>lowerLeft pA1DrainConnX~>upperLeft)
@@ -1267,22 +1340,22 @@ pB1DrainConnX=rodCreatePath(
 		)
 )
 pnV2Conn=rodCreatePath(
-		?layer list("metal2" "drawing")
-		?width metalWidth2
+		?layer list("metal3" "drawing")
+		?width metalWidth3
 		?pts
 		list(
 		pBV2ConnX~>lowerRight pB1DrainConnX~>upperRight)
 )
 ;NMOS CD Source Conn to NMOSE Drain
 nDDrainConn1=rodCreatePath(
-		?layer list("metal2" "drawing")
+		?layer list("metal3" "drawing")
 		?width nC3SourceObj~>width
 		?pts
 		list(
 		nEDrainConn~>lowerLeft nSourceConn1~>lowerCenter)
 )
 nDDrainConn2=rodCreatePath(
-		?layer list("metal2" "drawing")
+		?layer list("metal3" "drawing")
 		?width nC4SourceObj~>width
 		?pts
 		list(
@@ -1387,6 +1460,7 @@ rodAlign(
 	?refHandle "upperRight"
 )
 ;Pmos to NMOS
+;V1Conn
 via2_pn1=rodCreateRect(
 			?layer "text"
 			?length metalWidth2
@@ -1411,6 +1485,76 @@ rodAlign(
 	?refObj pAV1ConnX
 	?refHandle "upperRight"
 )
+M2RectV1=rodCreateRect(
+	?layer list("metal2" "drawing")
+	?width pAV1ConnX~>length
+	?length pnV1Conn~>width
+)
+rodAlign(
+	?alignObj M2RectV1
+	?alignHandle "lowerLeft"
+	?refObj pnV1Conn
+	?refHandle "lowerLeft"
+)
+via3_pnv1=rodCreateRect(
+			?layer "text"
+			?length pnV1Conn~>width
+			?width  pAV1ConnX~>length
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via3_pnv1
+	?alignHandle "lowerLeft"
+	?refObj pnV1Conn
+	?refHandle "lowerLeft"
+)
+M2RectV12=rodCreateRect(
+	?layer list("metal2" "drawing")
+	?width pAV1ConnX~>length
+	?length pnV1Conn~>width
+)
+rodAlign(
+	?alignObj M2RectV12
+	?alignHandle "upperRight"
+	?refObj pnV1Conn
+	?refHandle "upperRight"
+)
+via3_pnv12=rodCreateRect(
+			?layer "text"
+			?length pnV1Conn~>width
+			?width  pAV1ConnX~>length
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via3_pnv12
+	?alignHandle "lowerLeft"
+	?refObj pnV1Conn
+	?refHandle "lowerLeft"
+)
 via2_pn2=rodCreateRect(
 			?layer "text"
 			?length metalWidth2
@@ -1431,6 +1575,101 @@ via2_pn2=rodCreateRect(
 )
 rodAlign(
 	?alignObj via2_pn2
+	?alignHandle "lowerLeft"
+	?refObj M2RectV12
+	?refHandle "lowerLeft"
+)
+;V2 Conn
+M2RectV21=rodCreateRect(
+	?layer list("metal2" "drawing")
+	?length pnV2Conn~>width
+	?width metalWidth2
+)
+rodAlign(
+	?alignObj M2RectV21
+	?alignHandle "upperRight"
+	?refObj pnV2Conn
+	?refHandle "upperRight"
+)
+via2_MV21=rodCreateRect(
+			?layer "text"
+			?length pnV2Conn~>width
+			?width  metalWidth2
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_MV21
+	?alignHandle "upperRight"
+	?refObj pnV2Conn
+	?refHandle "upperRight"
+)
+M2RectV22=rodCreateRect(
+	?layer list("metal2" "drawing")
+	?length pnV2Conn~>width
+	?width metalWidth2
+)
+rodAlign(
+	?alignObj M2RectV22
+	?alignHandle "lowerLeft"
+	?refObj pnV2Conn
+	?refHandle "lowerLeft"
+)
+via2_MV22=rodCreateRect(
+			?layer "text"
+			?length pnV2Conn~>width
+			?width  metalWidth2
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_MV22
+	?alignHandle "lowerLeft"
+	?refObj pnV2Conn
+	?refHandle "lowerLeft"
+)
+via2_MV2=rodCreateRect(
+			?layer "text"
+			?length pnV2Conn~>width
+			?width  metalWidth2
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_MV2
 	?alignHandle "lowerLeft"
 	?refObj pBV2ConnX
 	?refHandle "lowerLeft"
@@ -1461,6 +1700,31 @@ rodAlign(
 	?refObj nC1DrainObj
 	?refHandle "lowerLeft"
 )
+via2_nC1D=rodCreateRect(
+			?layer "text"
+			?length nC1DrainObj~>length
+			?width  nC1DrainObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC1D
+	?alignHandle "lowerLeft"
+	?refObj nC1DrainObj
+	?refHandle "lowerLeft"
+)
+;C2
 via1_nC2D=rodCreateRect(
 			?layer "text"
 			?length nC2DrainObj~>length
@@ -1485,6 +1749,31 @@ rodAlign(
 	?refObj nC2DrainObj
 	?refHandle "lowerLeft"
 )
+via2_nC2D=rodCreateRect(
+			?layer "text"
+			?length nC2DrainObj~>length
+			?width  nC2DrainObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC2D
+	?alignHandle "lowerLeft"
+	?refObj nC2DrainObj
+	?refHandle "lowerLeft"
+)
+;
 via1_nC3D=rodCreateRect(
 			?layer "text"
 			?length nC3DrainObj~>length
@@ -1509,6 +1798,31 @@ rodAlign(
 	?refObj nC3DrainObj
 	?refHandle "lowerLeft"
 )
+via2_nC3D=rodCreateRect(
+			?layer "text"
+			?length nC3DrainObj~>length
+			?width  nC3DrainObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC3D
+	?alignHandle "lowerLeft"
+	?refObj nC3DrainObj
+	?refHandle "lowerLeft"
+)
+;D1D
 via1_nD1D=rodCreateRect(
 			?layer "text"
 			?length nD1DrainObj~>length
@@ -1533,6 +1847,31 @@ rodAlign(
 	?refObj nD1DrainObj
 	?refHandle "lowerLeft"
 )
+via2_nD1D=rodCreateRect(
+			?layer "text"
+			?length nD1DrainObj~>length
+			?width  nD1DrainObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nD1D
+	?alignHandle "lowerLeft"
+	?refObj nD1DrainObj
+	?refHandle "lowerLeft"
+)
+;D3
 via1_nD3D=rodCreateRect(
 			?layer "text"
 			?length nD3DrainObj~>length
@@ -1557,6 +1896,31 @@ rodAlign(
 	?refObj nD3DrainObj
 	?refHandle "lowerLeft"
 )
+via2_nD3D=rodCreateRect(
+			?layer "text"
+			?length nD3DrainObj~>length
+			?width  nD3DrainObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nD3D
+	?alignHandle "lowerLeft"
+	?refObj nD3DrainObj
+	?refHandle "lowerLeft"
+)
+;D4
 via1_nD4D=rodCreateRect(
 			?layer "text"
 			?length nD4DrainObj~>length
@@ -1581,6 +1945,31 @@ rodAlign(
 	?refObj nD4DrainObj
 	?refHandle "lowerLeft"
 )
+via2_nD4D=rodCreateRect(
+			?layer "text"
+			?length nD4DrainObj~>length
+			?width  nD4DrainObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nD4D
+	?alignHandle "lowerLeft"
+	?refObj nD4DrainObj
+	?refHandle "lowerLeft"
+)
+;C1S
 via1_nC1S=rodCreateRect(
 			?layer "text"
 			?length nC1SourceObj~>length
@@ -1605,6 +1994,31 @@ rodAlign(
 	?refObj nC1SourceObj
 	?refHandle "lowerLeft"
 )
+via2_nC1S=rodCreateRect(
+			?layer "text"
+			?length nC1SourceObj~>length
+			?width  nC1SourceObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC1S
+	?alignHandle "lowerLeft"
+	?refObj nC1SourceObj
+	?refHandle "lowerLeft"
+)
+;C2S
 via1_nC2S=rodCreateRect(
 			?layer "text"
 			?length nC2SourceObj~>length
@@ -1629,6 +2043,31 @@ rodAlign(
 	?refObj nC2SourceObj
 	?refHandle "lowerLeft"
 )
+via2_nC2S=rodCreateRect(
+			?layer "text"
+			?length nC2SourceObj~>length
+			?width  nC2SourceObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC2S
+	?alignHandle "lowerLeft"
+	?refObj nC2SourceObj
+	?refHandle "lowerLeft"
+)
+;C3S
 via1_nC3S=rodCreateRect(
 			?layer "text"
 			?length nC3SourceObj~>length
@@ -1653,6 +2092,31 @@ rodAlign(
 	?refObj nC3SourceObj
 	?refHandle "lowerLeft"
 )
+via2_nC3S=rodCreateRect(
+			?layer "text"
+			?length nC3SourceObj~>length
+			?width  nC3SourceObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC3S
+	?alignHandle "lowerLeft"
+	?refObj nC3SourceObj
+	?refHandle "lowerLeft"
+)
+;C4S
 via1_nC4S=rodCreateRect(
 			?layer "text"
 			?length nC4SourceObj~>length
@@ -1677,6 +2141,30 @@ rodAlign(
 	?refObj nC4SourceObj
 	?refHandle "lowerLeft"
 )
+via2_nC4S=rodCreateRect(
+			?layer "text"
+			?length nC4SourceObj~>length
+			?width  nC4SourceObj~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.065
+			?length 0.065	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nC4S
+	?alignHandle "lowerLeft"
+	?refObj nC4SourceObj
+	?refHandle "lowerLeft"
+)
 ;via2
 via2_nC1=rodCreateRect(
 			?layer "text"
@@ -1685,7 +2173,7 @@ via2_nC1=rodCreateRect(
 			?subRectArray
 			list(
 			list(
-			?layer "via2"
+			?layer "via3"
 			?width 0.07
 			?length 0.07	
 			?lowerLeftOffsetX 0.005
@@ -1699,7 +2187,7 @@ via2_nC1=rodCreateRect(
 rodAlign(
 	?alignObj via2_nC1
 	?alignHandle "upperRight"
-	?refObj nC1DrainM2
+	?refObj nC1DrainM3
 	?refHandle "upperRight"
 )
 via2_nC2=rodCreateRect(
@@ -1709,7 +2197,7 @@ via2_nC2=rodCreateRect(
 			?subRectArray
 			list(
 			list(
-			?layer "via2"
+			?layer "via3"
 			?width 0.07
 			?length 0.07	
 			?lowerLeftOffsetX 0.005
@@ -1723,7 +2211,7 @@ via2_nC2=rodCreateRect(
 rodAlign(
 	?alignObj via2_nC2
 	?alignHandle "upperRight"
-	?refObj nC2DrainM2
+	?refObj nC2DrainM3
 	?refHandle "upperRight"
 )
 via2_nC3=rodCreateRect(
@@ -1733,7 +2221,7 @@ via2_nC3=rodCreateRect(
 			?subRectArray
 			list(
 			list(
-			?layer "via2"
+			?layer "via3"
 			?width 0.07
 			?length 0.07	
 			?lowerLeftOffsetX 0.005
@@ -1747,7 +2235,7 @@ via2_nC3=rodCreateRect(
 rodAlign(
 	?alignObj via2_nC3
 	?alignHandle "lowerLeft"
-	?refObj nC3DrainM2
+	?refObj nC3DrainM3
 	?refHandle "lowerLeft"
 )
 via2_nD1=rodCreateRect(
@@ -1757,7 +2245,7 @@ via2_nD1=rodCreateRect(
 			?subRectArray
 			list(
 			list(
-			?layer "via2"
+			?layer "via3"
 			?width 0.07
 			?length 0.07	
 			?lowerLeftOffsetX 0.005
@@ -1771,7 +2259,7 @@ via2_nD1=rodCreateRect(
 rodAlign(
 	?alignObj via2_nD1
 	?alignHandle "upperRight"
-	?refObj nD1DrainM2
+	?refObj nD1DrainM3
 	?refHandle "upperRight"
 )
 via2_nD3=rodCreateRect(
@@ -1781,7 +2269,7 @@ via2_nD3=rodCreateRect(
 			?subRectArray
 			list(
 			list(
-			?layer "via2"
+			?layer "via3"
 			?width 0.07
 			?length 0.07	
 			?lowerLeftOffsetX 0.005
@@ -1795,7 +2283,7 @@ via2_nD3=rodCreateRect(
 rodAlign(
 	?alignObj via2_nD3
 	?alignHandle "lowerLeft"
-	?refObj nD3DrainM2
+	?refObj nD3DrainM3
 	?refHandle "lowerLeft"
 )
 via2_nD4=rodCreateRect(
@@ -1805,7 +2293,7 @@ via2_nD4=rodCreateRect(
 			?subRectArray
 			list(
 			list(
-			?layer "via2"
+			?layer "via3"
 			?width 0.07
 			?length 0.07	
 			?lowerLeftOffsetX 0.005
@@ -1819,7 +2307,7 @@ via2_nD4=rodCreateRect(
 rodAlign(
 	?alignObj via2_nD4
 	?alignHandle "lowerLeft"
-	?refObj nD4DrainM2
+	?refObj nD4DrainM3
 	?refHandle "lowerLeft"
 )
 ;Contact
@@ -2040,6 +2528,42 @@ rodAlign(
 	?refObj nDDrainConn1
 	?refHandle "lowerLeft"
 )
+M2RectE1=rodCreateRect(
+	?layer list("metal2" "drawing")
+	?width nDDrainConn1~>width
+	?length metalWidth2
+)
+rodAlign(
+	?alignObj M2RectE1
+	?alignHandle "lowerLeft"
+	?refObj nDDrainConn1
+	?refHandle "lowerLeft"
+)
+via2_nE1=rodCreateRect(
+			?layer "text"
+			?length metalWidth2
+			?width  nDDrainConn1~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nE1
+	?alignHandle "lowerLeft"
+	?refObj nDDrainConn1
+	?refHandle "lowerLeft"
+)
+;E3
 via1_nE3=rodCreateRect(
 			?layer "text"
 			?length metalWidth2
@@ -2060,6 +2584,41 @@ via1_nE3=rodCreateRect(
 )
 rodAlign(
 	?alignObj via1_nE3
+	?alignHandle "lowerLeft"
+	?refObj nDDrainConn2
+	?refHandle "lowerLeft"
+)
+M2RectE2=rodCreateRect(
+	?layer list("metal2" "drawing")
+	?width nDDrainConn2~>width
+	?length metalWidth2
+)
+rodAlign(
+	?alignObj M2RectE2
+	?alignHandle "lowerLeft"
+	?refObj nDDrainConn2
+	?refHandle "lowerLeft"
+)
+via2_nE2=rodCreateRect(
+			?layer "text"
+			?length metalWidth2
+			?width  nDDrainConn2~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via2"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via2_nE2
 	?alignHandle "lowerLeft"
 	?refObj nDDrainConn2
 	?refHandle "lowerLeft"
@@ -2112,6 +2671,149 @@ rodAlign(
 	?alignHandle "upperRight"
 	?refObj nFDrainConn
 	?refHandle "upperRight"
+)
+;M3M4 Conn NMOS
+;V1
+M4RectnC1=rodCreateRect(
+	?layer list("metal4" "drawing")
+	?length metalWidth4
+	?width nCDrainConn~>width
+)
+rodAlign(
+	?alignObj M4RectnC1
+	?alignHandle "upperRight"
+	?refObj nCDrainConn
+	?refHandle "upperRight"
+)
+via3_nc1=rodCreateRect(
+			?layer "text"
+			?length metalWidth4
+			?width  nCDrainConn~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via3"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via3_nc1
+	?alignHandle "upperRight"
+	?refObj nCDrainConn
+	?refHandle "upperRight"
+)
+M4RectnC2=rodCreateRect(
+	?layer list("metal4" "drawing")
+	?length metalWidth4
+	?width nCDrainConn~>width
+)
+rodAlign(
+	?alignObj M4RectnC2
+	?alignHandle "lowerLeft"
+	?refObj nCDrainConn
+	?refHandle "lowerLeft"
+)
+via3_nc2=rodCreateRect(
+			?layer "text"
+			?length metalWidth4
+			?width  nCDrainConn~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via3"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via3_nc2
+	?alignHandle "lowerLeft"
+	?refObj nCDrainConn
+	?refHandle "lowerLeft"
+)
+;V2 conn
+M4RectnD1=rodCreateRect(
+	?layer list("metal4" "drawing")
+	?length metalWidth4
+	?width nDDrainConn~>width
+)
+rodAlign(
+	?alignObj M4RectnD1
+	?alignHandle "upperRight"
+	?refObj nDDrainConn
+	?refHandle "upperRight"
+)
+via3_nD1=rodCreateRect(
+			?layer "text"
+			?length metalWidth4
+			?width  nDDrainConn~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via3"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via3_nD1
+	?alignHandle "upperRight"
+	?refObj nDDrainConn
+	?refHandle "upperRight"
+)
+M4RectnD2=rodCreateRect(
+	?layer list("metal4" "drawing")
+	?length metalWidth4
+	?width nDDrainConn~>width
+)
+rodAlign(
+	?alignObj M4RectnD2
+	?alignHandle "lowerLeft"
+	?refObj nDDrainConn
+	?refHandle "lowerLeft"
+)
+via3_nD2=rodCreateRect(
+			?layer "text"
+			?length metalWidth4
+			?width  nDDrainConn~>width
+			?subRectArray
+			list(
+			list(
+			?layer "via3"
+			?width 0.07
+			?length 0.07	
+			?lowerLeftOffsetX 0.005
+			?lowerLeftOffsetY 0.005
+			?upperRightOffsetX -0.005
+			?upperRightOffsetY -0.005
+			?spaceX 0.075
+			?spaceY 0.075
+	))	
+)
+rodAlign(
+	?alignObj via3_nD2
+	?alignHandle "lowerLeft"
+	?refObj nDDrainConn
+	?refHandle "lowerLeft"
 )
 ;Bulk Connection
 Bulk_pmos=dbOpenCellViewByType("test_Pcells" "psub" "layout")
@@ -2358,7 +3060,7 @@ outPinObj=rodCreateRect(
 		?pin t
 		?termIOType "output"
 		?pinLabel t
-		?layer list("metal2" "drawing")
+		?layer list("metal3" "drawing")
 		?width contWidth+2.0*metalContEnclose
 		?length contWidth+2.0*metalContEnclose
 )
@@ -2383,7 +3085,6 @@ rodAlign(
 	?refObj nFDrainConn
 	?refHandle if(nFDrainConn~>numSegments ==1 "centerCenter" "mid1")
 )
-
 )
 )
 
